@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import RouteComponent from "./components/RouteComponent";
 
 import { createReduxStore } from "./redux/store";
+import Footer from "./components/Footer";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <RouteComponent />
+        <Footer />
       </BrowserRouter>
     </Provider>
   );

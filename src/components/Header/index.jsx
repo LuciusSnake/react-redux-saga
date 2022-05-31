@@ -1,13 +1,20 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
+import style from "./style.module.scss"
+
 const Header = () => {
   return (
-    <nav>
-      <Link to="/">Home</Link>
-      <Link to="counter">Counter</Link>
-      <Link to="redux-counter">Redux Counter</Link>
-    </nav>
+    <header className={style.header}>
+      <nav className={style.nav}>
+        <ul className={style.ul}>
+          <li><Link className={style.link} to="/">Home</Link></li>
+          <li><Link className={style.link} to="users">Users</Link></li>
+          <li><Link className={style.link} to="counter">Counter</Link></li>
+          <li><Link className={style.link} to="redux-counter">Redux Counter</Link></li>
+        </ul>
+      </nav>
+    </header>
   );
 };
 
