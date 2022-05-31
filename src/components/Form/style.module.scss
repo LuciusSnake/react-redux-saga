@@ -1,7 +1,7 @@
 .formWrapper {
     background-color: #1d2227;
-    height: 100vh;
     font-family: 'Montserrat', sans-serif;
+    padding: 10px 0;
 
     .container {
         height: 100%;
@@ -60,7 +60,6 @@
             
             label input:focus {
                 max-width: 100%;
-                width: 400px;
             }
         
             label input:valid + .labelText {
