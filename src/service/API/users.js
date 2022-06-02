@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getUsers = () => {
+export const getUsersApi = () => {
   // setLoading(true)
   return axios.get("https://jsonplaceholder.typicode.com/users")
     .then(response => {
@@ -9,3 +9,10 @@ export const getUsers = () => {
     // .catch(err => {console.log(err);})
     // .finally(() => { setLoading(false) })
 };
+
+export const createUsersApi = (data) => {
+  return axios.post("https://jsonplaceholder.typicode.com/users", data)
+    .then(response => {
+      return response.data;
+    })
+}

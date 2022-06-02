@@ -6,29 +6,35 @@ function Table({users}) {
     return (
       <div className={style.tableWrapper}>
         <table className={style.table}>
+          <thead>
             <tr>
-                <th>№</th>
-                <th>Name</th>
-                <th>S. Name</th>
-                <th>Age</th>
-                <th>Address</th>
+              <th>№</th>
+              <th>Name</th>
+              <th>S. Name</th>
+              <th>Age</th>
+              <th>Address</th>
             </tr>
+          </thead>
 
+          <tbody>
             {users.map((user) => {
-                const name = user.name.split(" ")[0];
-                const surname = user.name.split(" ")[1];
-                const { city, street, suite } = user.address;
+              const name = user.name.split(" ")[0];
+              const surname = user.name.split(" ")[1];
+              const { city, street, suite } = user.address;
 
-                return (
-                    <tr>
-                        <td>{user.id}</td>
-                        <td>{name}</td>
-                        <td>{surname}</td>
-                        <td>{user.age || "-"}</td>
-                        <td>{city}, {street}, {suite}</td>
-                    </tr>
-                );
+              return (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{name}</td>
+                  <td>{surname}</td>
+                  <td>{user.age || "-"}</td>
+                  <td>
+                    {city}, {street}, {suite}
+                  </td>
+                </tr>
+              );
             })}
+          </tbody>
 
           {/* <tr>
                     <td>1</td>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { createUsersApi } from '../../service/API/users';
+import { postUserAdapter } from "../../service/adapters/userAdapter";
 
 import style from "./style.module.scss"
 
@@ -12,23 +14,36 @@ const INITIAL_STATE = {
   suite: "",
 };
 
-function Form() {
-    const [form, setForm] = useState(INITIAL_STATE);
-    
-    const handleChange = (event) => {
-        const value = event.target.value;
-        const name = event.target.name;
 
-        setForm((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }))
-    }
+function Form({ onSubmit }) {
+  const [form, setForm] = useState(INITIAL_STATE);
+    
+  const handleChange = (event) => {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    setForm((prevState) => ({
+        ...prevState,
+        [name]: value,
+    }))
+  }
+
+  const handleClick = (event) => {
+    event.preventDefault();
+
+    const {name, surname, age, city, street, suite} = form;
+
+    if (!name || !surname || !age || !city || !street || !suite) return;
+
+      createUsersApi(postUserAdapter(form)).then((data) => {
+        onSubmit((prev) => [...prev, data]);
+      });
+  }
 
   return (
     <div className={style.formWrapper}>
       <div className={style.container}>
-        <form>
+        <form onSubmit={handleClick}>
           <label>
             <input
               name="name"
@@ -95,7 +110,7 @@ function Form() {
             />
             <div className={style.labelText}>Suite</div>
           </label>
-          <button type="submit" value="Submit">
+          <button type="submit" value="Submit" onClick={handleClick}>
             Submit
           </button>
         </form>
