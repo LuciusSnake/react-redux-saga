@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap';
 
-import Form from '../components/Form';
-import Table from '../components/Table';
-import CustomModal from "../components/Modal";
+import CustomForm from '../../components/Form';
+import CustomTable from '../../components/Table';
+import CustomModal from "../../components/Modal";
 
-import { getUsersApi } from '../service/API/users';
+import { getUsersApi } from '../../service/API/users';
 
+import style from './style.module.scss'
 
 const Users = () => {
   const [ users, setUsers ] = useState([]);
@@ -21,14 +22,18 @@ const Users = () => {
   }, []);
 
   return (
-    <div>
-      <Button onClick={toggleModal}>Add User</Button>
+    <div className={style.div}>
+      <div className="d-grid gap-2">
+        <Button variant="primary" size="lg" onClick={toggleModal}>
+          Add User
+        </Button>
+      </div>
 
       <CustomModal isShow={isShow} onClose={toggleModal} title={"Add user"}>
-        <Form onSubmit={setUsers} />
+        <CustomForm onSubmit={setUsers} />
       </CustomModal>
 
-      <Table users={users} />
+      <CustomTable users={users} />
     </div>
   );
 };

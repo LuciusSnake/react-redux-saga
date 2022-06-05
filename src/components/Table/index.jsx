@@ -1,11 +1,13 @@
 import React from 'react'
+import { Table } from 'react-bootstrap';
 
 import style from "./style.module.scss"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Table({users}) {
+
+function CustomTable({users}) {
     return (
-      <div className={style.tableWrapper}>
-        <table className={style.table}>
+        <Table striped bordered hover size="sm" className={style.table}>
           <thead>
             <tr>
               <th>№</th>
@@ -64,9 +66,8 @@ function Table({users}) {
                     <td>25</td>
                     <td>Beach St.</td>
                 </tr> */}
-        </table>
-      </div>
+        </Table>
     );
 }
 
-export default React.memo(Table)
+export default React.memo(CustomTable)

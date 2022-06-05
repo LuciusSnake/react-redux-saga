@@ -4,7 +4,7 @@ import Main from '../pages/Main';
 import Counter from '../pages/Counter';
 import Error404 from "../pages/404";
 import ReduxCounter from '../pages/ReduxCounter';
-import Users from '../pages/Users';
+import Users from '../pages/Users/Users';
 
 const RouteComponent = () => {
   return (
