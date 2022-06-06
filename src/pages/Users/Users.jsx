@@ -5,15 +5,31 @@ import CustomForm from '../../components/Form';
 import CustomTable from '../../components/Table';
 import CustomModal from "../../components/Modal";
 
-import { getUsersApi } from '../../service/API/users';
+import { createUsersApi, getUsersApi } from '../../service/API/users';
+import { postUserAdapter } from "../../service/adapters/userAdapter";
 
 import style from './style.module.scss'
+
+
 
 const Users = () => {
   const [ users, setUsers ] = useState([]);
   const [ isShow, setShow ] = useState(false);
 
-  const toggleModal = _ => setShow(prev => !prev);
+  const toggleModal = () => setShow(prev => !prev);
+
+  const handleSave = (form) => (event) => {
+    event.preventDefault();
+
+    const { name, surname, age, city, street, suite } = form;
+
+    if (!name || !surname || !age || !city || !street || !suite) return;
+
+    createUsersApi(postUserAdapter(form)).then((data) => {
+      setUsers((prev) => [...prev, data]);
+      toggleModal();
+    });
+  };
 
   useEffect(() => {
     getUsersApi().then((data) => {
@@ -30,7 +46,7 @@ const Users = () => {
       </div>
 
       <CustomModal isShow={isShow} onClose={toggleModal} title={"Add user"}>
-        <CustomForm onSubmit={setUsers} />
+        <CustomForm onSubmit={handleSave} />
       </CustomModal>
 
       <CustomTable users={users} />
