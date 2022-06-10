@@ -15,4 +15,4 @@ export const createUsersApi = (data) => {
     .then(response => {
       return response.data;
     })
-}
+};

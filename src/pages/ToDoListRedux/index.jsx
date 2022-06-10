@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { InputGroup, FormControl, Button, ListGroup, } from "react-bootstrap";
-import ToDoElement from './_elements/ToDoElement';
+import ToDoElementRedux from './_elements/ToDoElement';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from './style.module.scss'
 
-function ToDo() {
+function ToDoRedux() {
   const [ text, setText ] = useState('');
   const [ list, setList ] = useState([]);
 
@@ -51,7 +51,13 @@ function ToDo() {
 
         <ListGroup as="ol" numbered>
           {list.map(({ id, text }) => (
-            <ToDoElement key={id} id={id} setList={setList} text={text} list={list} />
+            <ToDoElementRedux
+              key={id}
+              id={id}
+              setList={setList}
+              text={text}
+              list={list}
+            />
           ))}
         </ListGroup>
       </div>
@@ -59,4 +65,4 @@ function ToDo() {
   );
 }
 
-export default React.memo(ToDo)
+export default React.memo(ToDoRedux);

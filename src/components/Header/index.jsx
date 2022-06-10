@@ -29,6 +29,11 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            <Link className={style.link} to="todolist">
+              ToDo List Redux
+            </Link>
+          </li>
+          <li>
             <Link className={style.link} to="redux-counter">
               Redux Counter
             </Link>
