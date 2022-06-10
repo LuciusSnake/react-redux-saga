@@ -26,12 +26,16 @@ function ToDo() {
 
   const handleRemove = (id) => () => {
     setList(prevState => prevState.filter((element) => element.id !== id))
-  } 
+  }
+
+  const handleEdit = () => {
+
+  }
 
   return (
-    <div>
+    <div className={style.wrapper}>
       <div className={style.input__wrapper}>
-        <InputGroup className="mb-3">
+        <InputGroup className={style.input_group}>
           <FormControl
             placeholder="Input Text"
             aria-label="Input Text"
@@ -51,19 +55,22 @@ function ToDo() {
       </div>
 
       <div className={style.list__wrapper}>
-        {/* { Array.length (&& ||) <p>ToDO List is Empty</p>} */}
+        {!list.length
+          ? <p>ToDO List is Empty</p>
+          : null
+        }
+
         <ListGroup as="ol" numbered>
           {list.map(({ id, text }) => {
             return (
               <ListGroup.Item
                 key={id}
                 as="li"
-                className="d-flex justify-content-between align-items-start"
-              >
+                className="d-flex justify-content-between align-items-start">
+
                 <div className="ms-2 me-auto">{text}</div>
-                <Button variant="danger" onClick={handleRemove(id)}>
-                  Remove
-                </Button>
+                <Button className={style.btn} variant="warning" onClick={handleEdit}>Edit</Button>
+                <Button className={style.btn} variant="danger" onClick={handleRemove(id)}>Remove</Button>
               </ListGroup.Item>
             );
           })}
