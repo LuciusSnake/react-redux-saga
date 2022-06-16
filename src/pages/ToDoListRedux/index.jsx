@@ -1,22 +1,26 @@
 import React from 'react'
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { InputGroup, FormControl, Button, ListGroup, } from "react-bootstrap";
-import ToDoElementRedux from './_elements/ToDoElement';
 
-import "bootstrap/dist/css/bootstrap.min.css";
+import ToDoElementRedux from './_elements/ToDoElement';
+import { addTodoAction } from '../../redux/actions/toDo';
+
 import style from './style.module.scss'
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function ToDoRedux() {
+  const dispatch = useDispatch();
+  const { todos } = useSelector(state => state.todoReducer);
   const [ text, setText ] = useState('');
-  const [ list, setList ] = useState([]);
 
   const handleChange = (event) => {
     const value = event.target.value;
     setText(value)
   }
-  
+
   const handleClick = () => {
-    setList(prevState => [...prevState, {id: new Date().getTime(), text: text}]);
+    dispatch(addTodoAction(text));
     setText('');
   }
 
@@ -47,16 +51,15 @@ function ToDoRedux() {
       </div>
 
       <div className={style.list__wrapper}>
-        {!list.length && <p>ToDO List is Empty</p>}
+        {!todos.length && <p>ToDO List is Empty</p>}
 
         <ListGroup as="ol" numbered>
-          {list.map(({ id, text }) => (
+          {todos.map(({ id, text }) => (
             <ToDoElementRedux
               key={id}
               id={id}
-              setList={setList}
               text={text}
-              list={list}
+              list={todos}
             />
           ))}
         </ListGroup>

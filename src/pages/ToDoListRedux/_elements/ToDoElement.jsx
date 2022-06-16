@@ -1,26 +1,30 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Button, ListGroup } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { removeTodoAction, editTodoAction } from "../../../redux/actions/toDo.js";
 import style from '../style.module.scss'
 
-
-function ToDoElementRedux({ id, setList, text, list }) {
+function ToDoElementRedux({ id, text, list }) {
+  const dispatch = useDispatch();
   const [isEdit, setEdit] = useState(false);
   const [editText, setEditText] = useState(text);
 
   const input = useRef(null);
 
   const handleRemove = (id) => () => {
-    setList((prevState) => prevState.filter((element) => element.id !== id));
+    dispatch(removeTodoAction(id));
+    // setList((prevState) => prevState.filter((element) => element.id !== id));
   };
 
   const handleEdit = () => setEdit(true);
 
   const handleSave = () => {
-    const index = list.findIndex((item) => item.id === id);
-    const newList = [...list];
-    newList[index].text = editText;
+    dispatch(editTodoAction(id, editText))
+    // const index = list.findIndex((item) => item.id === id);
+    // const newList = [...list];
+    // newList[index].text = editText;
 
-    setList(newList);
+    // setList(newList);
     setEdit(false);
   };
 

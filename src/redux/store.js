@@ -11,7 +11,7 @@ const sagaMiddleware = createSagaMiddleware();
 export const createReduxStore = (initialState) => {
   const store = configureStore({
     reducer: rootReducer,
-    middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
+    middleware: [...getDefaultMiddleware({ thunk: true }), sagaMiddleware],
     preloadedState: initialState,
   });
   // sagaMiddleware.run(rootSaga);
